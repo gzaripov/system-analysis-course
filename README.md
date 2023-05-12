@@ -54,6 +54,7 @@ Why don't we use microservices at the beginning?
 - _No scaling issues_. Service load is really small, we can easyly grow 100x times and still live with monolith here 😮
 - _Service is small_. There won't be problem to deploy it, and in case if there will – we can move it to microservice
 - _Big overhead_. Microservices are commonly used to create large-scale and complicated services. They comes with a lot of issues to handle, lets defer this solution for a while.
+- _Don't start with services with distributed transactions_, the platform might be closed in a couple of months its more important too start 
 
 ### Components
 Lets start with high-level overview of components
@@ -84,3 +85,37 @@ Lets start with high-level overview of components
    
 - **Orders service** <br />
   API service that implement logic of working with orders (CRUD) with statuses
+  - crud order
+  - list orders for a specific period of time
+  - creates payslip/invoice
+
+- **Billing service** <br />
+  API service that implement logic of payments
+  - should be easy to add new payment system
+
+- **Bids service** <br />
+  Allows to make a bid for a specific order for managers (administrators)
+  - create bids
+  - calculate winner
+  - change winner/losers balances
+
+- **Matching service** <br />
+  Matches workers to orders
+  
+- **Notification service** <br />
+  Abstraction over notification
+  - from the beginning should work with email (mailchimp)
+
+- **S3-like storage** <br />
+  Needed for images, file attachments like photos, etc
+
+- **Relational DB storage** <br />
+  We can start with managed Postgres
+  
+![Components diagram](./images/components.svg)
+
+### Models
+TBD
+
+### Low level overview
+TBD
